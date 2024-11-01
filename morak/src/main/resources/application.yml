@@ -19,10 +19,13 @@ spring:
   ai:
     openai:
       api-key: ${spring.ai.openai.api-key}
-      model: gpt-3.5-turbo
+      model: gpt-4o-mini
       api:
         url: https://api.openai.com/v1/chat/completions
   data:
     redis:
       host: localhost
       port: 6379
+    mongodb:
+      uri: mongodb+srv://alstlr5414:ms1102001*@morakchat.y2ndt.mongodb.net/morak
+      database: morak

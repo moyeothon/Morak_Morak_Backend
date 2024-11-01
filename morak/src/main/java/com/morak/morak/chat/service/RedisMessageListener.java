@@ -1,41 +1,39 @@
 package com.morak.morak.chat.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.redis.connection.MessageListener;
 import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
-@RequiredArgsConstructor
 @Component
+@RequiredArgsConstructor
 public class RedisMessageListener {
-	private static final Map<Long, ChannelTopic> TOPICS = new HashMap<>();
+
 	private final RedisMessageListenerContainer redisMessageListenerContainer;
 	private final RedisSubscriber redisSubscriber;
 
-	public void enterChatRoom(String debateRoomId){
-		Long i = Long.parseLong(debateRoomId);
-		ChannelTopic topic = getTopic(debateRoomId);
+	// 채팅방별 토픽을 관리하는 맵
+	private static final Map<String, ChannelTopic> TOPICS = new ConcurrentHashMap<>();
 
-		if (topic == null){
-			topic = new ChannelTopic(String.valueOf(debateRoomId));
-			redisMessageListenerContainer.addMessageListener(redisSubscriber, topic);
-			TOPICS.put(i, topic);
+	// 특정 채팅방에 대한 구독 시작
+	public void subscribeToRoom(String roomId) {
+		// 채팅방 ID별로 토픽을 생성하고, 이미 존재하면 해당 토픽 사용
+		ChannelTopic topic = TOPICS.computeIfAbsent(roomId, id -> {
+			ChannelTopic newTopic = new ChannelTopic(id);
+			redisMessageListenerContainer.addMessageListener((MessageListener) redisSubscriber, newTopic);
+			return newTopic;
+		});
+	}
+
+	// 특정 채팅방에 대한 구독 해제
+	public void unsubscribeFromRoom(String roomId) {
+		ChannelTopic topic = TOPICS.remove(roomId);
+		if (topic != null) {
+			redisMessageListenerContainer.removeMessageListener((MessageListener) redisSubscriber, topic);
 		}
-	}
-
-	public void deleteChatRoom(String debateRoomId) {
-		Long i = Long.parseLong(debateRoomId);
-
-		redisMessageListenerContainer.removeMessageListener(redisSubscriber, getTopic(debateRoomId));
-		TOPICS.remove(i);
-	}
-
-	public ChannelTopic getTopic(String debateRoomId){
-		Long i = Long.parseLong(debateRoomId);
-
-		return TOPICS.get(i);
 	}
 }
