@@ -1,5 +1,8 @@
 package com.morak.morak.gpt.controller;
 
+import com.morak.morak.common.ApiResponseTemplate;
+import com.morak.morak.common.error.SuccessCode;
+import com.morak.morak.gpt.dto.GptResponseDto;
 import com.morak.morak.gpt.dto.UserGptRequestDto;
 import com.morak.morak.gpt.service.OpenAiService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -39,9 +42,9 @@ public class OpenAiController {
                     content = @Content(schema = @Schema(example = "INVALID_HEADER or INVALID_TOKEN")))
     })
     @PostMapping("/request")
-    public ResponseEntity<String> getChatTalk(@RequestBody @Valid UserGptRequestDto userGptRequestDto) {
-        String response = openAiService.askQuestion(userGptRequestDto);
-        return ResponseEntity.ok(response);
+    public ApiResponseTemplate<GptResponseDto> getChatTalk(@RequestBody @Valid UserGptRequestDto userGptRequestDto) {
+        GptResponseDto response = openAiService.askQuestion(userGptRequestDto);
+        return ApiResponseTemplate.successResponse(response, SuccessCode.GET_SUCCESS);
     }
 
     @Operation(summary = "힌트 요청", description = "현재 키워드에 대한 힌트를 요청합니다.")
@@ -52,9 +55,9 @@ public class OpenAiController {
                     content = @Content(schema = @Schema(example = "INVALID_HEADER or INVALID_TOKEN")))
     })
     @PostMapping("/hint")
-    public ResponseEntity<String> getHint() {
-        String hint = openAiService.getHint();
-        return ResponseEntity.ok(hint);
+    public ApiResponseTemplate<GptResponseDto> getHint() {
+        GptResponseDto responseDto = openAiService.getHint();
+        return ApiResponseTemplate.successResponse(responseDto, SuccessCode.GET_SUCCESS);
     }
 
     @Operation(summary = "게임 리셋", description = "게임을 리셋합니다.")
