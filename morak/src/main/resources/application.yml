@@ -1,5 +1,4 @@
 spring:
-<<<<<<< Updated upstream
   profiles:
     active: prod
   datasource:
@@ -23,10 +22,7 @@ spring:
       model: gpt-3.5-turbo
       api:
         url: https://api.openai.com/v1/chat/completions
-=======
-  application:
-    name: morak
-  redis:
-    host: localhost
-    port: 6379
->>>>>>> Stashed changes
+  data:
+    redis:
+      host: localhost
+      port: 6379

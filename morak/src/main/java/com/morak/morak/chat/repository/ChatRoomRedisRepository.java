@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@@Repository
+@Repository
 @RequiredArgsConstructor
 public class ChatRoomRedisRepository {
 
@@ -48,4 +48,4 @@ public class ChatRoomRedisRepository {
 		return objectMapper.convertValue(opsHashChatRoom.values(getChatRoomKey(userId)), new TypeReference<>() {});
 	}
 
-}}
+}
