@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat Room</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.0/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script src="chat.js"></script> <!-- chat.js 파일 경로 -->
+</head>
+<body>
+<h2>Chat Room</h2>
+<input id="username" placeholder="Username" />
+<input id="message" placeholder="Message" />
+<button id="send">Send</button>
+<div id="chat"></div>
+
+<script src="socket.js"></script> <!-- socket.js도 포함하기 -->
+</body>
+</html>

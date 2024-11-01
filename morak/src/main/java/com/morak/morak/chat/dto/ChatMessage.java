@@ -1,15 +1,11 @@
 package com.morak.morak.chat.dto;
 
-import lombok.Data;
-
-@Data
-public class ChatMessage {
-
-	public enum MessageType {
-		ENTER, TALK, EXIT, MATCH, MATCH_REQUEST;
-	}
-	private MessageType type;
-	private String roomId;
-	private String sender;
-	private String message;
+public record ChatMessage (
+		MessageType type,
+		String roomId,
+		String sender,
+		String message,
+		String time,
+		Long userCount
+) {
 }
