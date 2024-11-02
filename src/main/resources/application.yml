@@ -2,9 +2,10 @@ spring:
   profiles:
     active: prod
   datasource:
-    url: ${SPRING_DATASOURCE_URL}
-    username: ${SPRING_DATASOURCE_USERNAME}
-    password: ${SPRING_DATASOURCE_PASSWORD}
+    url: jdbc:mysql://mysql:3306/morak
+    username: root
+    password: toor  # MySQL root 비밀번호와 동일하게 설정
+
   jpa:
     hibernate:
       ddl-auto: update
