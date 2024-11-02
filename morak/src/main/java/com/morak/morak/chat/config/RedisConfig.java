@@ -1,4 +1,3 @@
-// RedisConfig.java
 package com.morak.morak.chat.config;
 
 import com.morak.morak.chat.service.RedisSubscriber;
@@ -26,24 +25,25 @@ public class RedisConfig {
 	}
 
 	@Bean
+	public ChannelTopic channelTopic() {
+		return new ChannelTopic("chatroom");
+	}
+
+	@Bean
 	public RedisMessageListenerContainer redisMessageListenerContainer(
 			RedisConnectionFactory connectionFactory,
-			MessageListenerAdapter messageListenerAdapter
+			MessageListenerAdapter listenerAdapter,
+			ChannelTopic channelTopic
 	) {
 		RedisMessageListenerContainer container = new RedisMessageListenerContainer();
 		container.setConnectionFactory(connectionFactory);
-		container.addMessageListener(messageListenerAdapter, channelTopic());
+		container.addMessageListener(listenerAdapter, channelTopic);
 		return container;
 	}
 
 	@Bean
-	public MessageListenerAdapter messageListenerAdapter(RedisSubscriber subscriber) {
-		return new MessageListenerAdapter(subscriber, "sendMessage");
-	}
-
-	@Bean
-	public ChannelTopic channelTopic() {
-		return new ChannelTopic("chatroom");
+	public MessageListenerAdapter listenerAdapter(RedisSubscriber subscriber) {
+		return new MessageListenerAdapter(subscriber);
 	}
 
 	@Bean

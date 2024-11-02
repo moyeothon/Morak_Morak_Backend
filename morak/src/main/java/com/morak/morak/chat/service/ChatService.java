@@ -1,12 +1,8 @@
 package com.morak.morak.chat.service;
 
 import com.morak.morak.chat.dto.ChatMessage;
-import com.morak.morak.chat.repository.ChatRoomRedisRepository;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
@@ -15,18 +11,16 @@ import org.springframework.stereotype.Service;
 public class ChatService {
 
     private final MongoService chatMongoService;
-    private final RedisTemplate<String, Object> redisTemplate;
-    private final ChannelTopic topic;
+    private final RedisPublisher redisPublisher;
 
     public ChatMessage sendMessage(ChatMessage message) {
+        // MongoDB에 메시지 저장
         ChatMessage savedMessage = chatMongoService.saveMessage(message);
-        redisTemplate.convertAndSend(topic.getTopic(), message);
 
+        // RedisPublisher를 통해 Redis로 메시지 발행
+        redisPublisher.publish(savedMessage);
+
+        log.info("Message sent and saved to MongoDB: {}", savedMessage);
         return savedMessage;
-    }
-
-    // 채팅방 ID로 메시지 검색
-    public List<ChatMessage> getMessagesByRoomId(String roomId) {
-        return chatMongoService.findMessagesByRoomId(roomId);
     }
 }

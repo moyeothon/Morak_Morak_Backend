@@ -1,32 +1,32 @@
-// RedisSubscriber.java
 package com.morak.morak.chat.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.morak.morak.chat.dto.ChatMessage;
-import com.morak.morak.chat.dto.ChatMessageSub;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.messaging.simp.SimpMessageSendingOperations;
+import org.springframework.data.redis.connection.Message;
+import org.springframework.data.redis.connection.MessageListener;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
-@Slf4j
 @RequiredArgsConstructor
 @Service
-public class RedisSubscriber {
+@Slf4j
+public class RedisSubscriber implements MessageListener {
 
+	private final SimpMessagingTemplate messagingTemplate;
 	private final ObjectMapper objectMapper;
-	private final SimpMessageSendingOperations messagingTemplate;
 
-	// Redis에서 수신한 메시지를 WebSocket을 통해 채팅방에 전달
-	public void sendMessage(String publishMessage) {
+	@Override
+	public void onMessage(Message message, byte[] pattern) {
 		try {
-			ChatMessage chatMessage = objectMapper.readValue(publishMessage, ChatMessageSub.class).chatMessage();
-			log.info("Redis Subscriber - Received chat message: {}", chatMessage.message());
+			ChatMessage chatMessage = objectMapper.readValue(message.getBody(), ChatMessage.class);
+			String destination = "/sub/chatroom/" + chatMessage.roomId();
+			messagingTemplate.convertAndSend(destination, chatMessage);
 
-			messagingTemplate.convertAndSend("/sub/chat/room/" + chatMessage.roomId(), chatMessage);
+			log.info("Received and forwarded message from Redis on topic {}: {}", new String(message.getChannel()), chatMessage);
 		} catch (Exception e) {
-			log.error("Exception while processing Redis message: {}", e.getMessage());
+			log.error("Error processing message from Redis: {}", e.getMessage(), e);
 		}
 	}
 }

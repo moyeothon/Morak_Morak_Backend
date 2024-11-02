@@ -1,11 +1,15 @@
 package com.morak.morak.chat.dto;
 
-public record ChatMessage (
-		MessageType type,
+import java.time.LocalDateTime;
+
+public record ChatMessage(
 		String roomId,
-		String sender,
-		String message,
-		String time,
-		Long userCount
+		Long userId,
+		String username,
+		String content,
+		LocalDateTime timestamp
 ) {
+	public ChatMessage {
+		timestamp = (timestamp == null) ? LocalDateTime.now() : timestamp;
+	}
 }

@@ -29,3 +29,4 @@ spring:
     mongodb:
       uri: mongodb+srv://alstlr5414:ms1102001*@morakchat.y2ndt.mongodb.net/morak
       database: morak
+
