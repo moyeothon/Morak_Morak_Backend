@@ -6,11 +6,12 @@ services:
       context: .  # 현재 디렉터리를 Docker 빌드 컨텍스트로 설정
     ports:
       - "8080:8080"
-    environment:
-      SPRING_PROFILES_ACTIVE: prod
-      SPRING_DATASOURCE_URL: mysql:3306/morak
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: toor
+  environment:
+    SPRING_PROFILES_ACTIVE: prod
+    SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/morak
+    SPRING_DATASOURCE_USERNAME: root
+    SPRING_DATASOURCE_PASSWORD: toor
+
     depends_on:
       - mysql
     networks:
