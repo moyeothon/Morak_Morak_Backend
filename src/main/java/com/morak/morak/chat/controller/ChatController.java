@@ -12,11 +12,9 @@ import org.springframework.stereotype.Controller;
 public class ChatController {
 
     private final SimpMessageSendingOperations messagingTemplate;
-    private final ChatRoomRepository chatRoomRepository;
 
     @MessageMapping("chat/message")
     public void message(ChatMessage message) {
-
         messagingTemplate.convertAndSend("/sub/chat/room/" + message.getRoomId(), message);
     }
 }
