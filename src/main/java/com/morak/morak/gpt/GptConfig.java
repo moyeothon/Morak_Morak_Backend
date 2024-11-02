@@ -7,7 +7,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Configuration
 public class GptConfig {
-    @Value("${spring.ai.openai.api-key}")
+    @Value("${spring.ai.openai.api.key}")
     private String openAiKey;
 
     @Bean
