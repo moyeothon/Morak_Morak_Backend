@@ -1,8 +1,25 @@
 services:
+  app:
+    build:
+      context: .
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_AI_OPENAI_API_KEY: your_openai_api_key  # 환경 변수 설정 추가
+    networks:
+      - backend
+
   mysql:
     image: mysql:8.0
     environment:
       MYSQL_DATABASE: morak
-      MYSQL_ROOT_PASSWORD: toor  # MySQL root 비밀번호
+      MYSQL_ROOT_PASSWORD: toor  # MySQL root 비밀번호 설정
     ports:
       - "3306:3306"
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
