@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: prod
+    active: prod  # 기본적으로 prod 프로파일을 활성화하도록 설정, 필요에 따라 변경 가능
   datasource:
     url: jdbc:mysql://db:3306/morak  # db는 docker-compose.yml에 정의된 MySQL 서비스의 이름
     username: root                   # root 사용자로 설정
@@ -12,7 +12,6 @@ spring:
 
 ai:
   openai:
-    api-key: ${spring.ai.openai.api-key}
     model: gpt-4o-mini
     api:
       url: https://api.openai.com/v1/chat/completions
