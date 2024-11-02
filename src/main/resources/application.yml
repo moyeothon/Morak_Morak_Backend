@@ -2,19 +2,16 @@ spring:
   profiles:
     active: prod
   datasource:
-    url: ${SPRING_DATASOURCE_URL}
-    username: ${SPRING_DATASOURCE_USERNAME}
-    password: ${SPRING_DATASOURCE_PASSWORD}
-
+    url: jdbc:mysql://localhost:3306/morak
+    username: root
+    password: toor
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
-
-spring:
   ai:
     openai:
-      api-key: ${SPRING_AI_OPENAI_API_KEY}
+      api-key: ${spring.ai.openai.api-key}
       model: gpt-4o-mini
       api:
         url: https://api.openai.com/v1/chat/completions
