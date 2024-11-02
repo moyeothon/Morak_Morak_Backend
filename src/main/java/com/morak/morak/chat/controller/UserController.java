@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,18 +21,18 @@ public class UserController {
     private final RoomService roomService;
 
     @PostMapping("/save")
-    public ResponseEntity<?> saveUser(UserDto userDto) {
+    public ResponseEntity<UserDto> saveUser(@RequestBody UserDto userDto) {
         userService.saveUser(userDto);
         return ResponseEntity.ok(userDto);
     }
 
     @GetMapping("/role")
-    public ResponseEntity<?> getUserRole(String username) {
+    public ResponseEntity<?> getUserRole(@RequestBody String username) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.getUser(username).role());
     }
 
     @GetMapping("/list")
-    public ResponseEntity<?> getUsers(String roomId) {
+    public ResponseEntity<?> getUsers(@RequestBody String roomId) {
         return ResponseEntity.status(HttpStatus.OK).body(roomService.getUsersInRoom(roomId));
     }
 
