@@ -10,7 +10,7 @@ spring:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     show-sql: true
     properties:
       hibernate:
@@ -22,11 +22,3 @@ spring:
       model: gpt-4o-mini
       api:
         url: https://api.openai.com/v1/chat/completions
-  data:
-    redis:
-      host: redis
-      port: 6379
-    mongodb:
-      uri: mongodb://mongodb:27017/morakg
-      database: morak
-
