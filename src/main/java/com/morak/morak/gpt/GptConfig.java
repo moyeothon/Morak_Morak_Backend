@@ -11,7 +11,7 @@ public class GptConfig {
     private String openAiKey;
 
     @Bean
-    public RestTemplate template(){
+    public RestTemplate template() {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getInterceptors().add((request, body, execution) -> {
             request.getHeaders().add("Authorization", "Bearer " + openAiKey);
