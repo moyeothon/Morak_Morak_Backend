@@ -110,7 +110,7 @@ public class OpenAiService {
                         OpenAiChatOptions.builder()
                                 .withTemperature(0.4F)
                                 .withFrequencyPenalty(0.7F)
-                                .withModel("gpt-3.5-turbo")
+                                .withModel("gpt-4o-mini")
                                 .build()
                 )
         );

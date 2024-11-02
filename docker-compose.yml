@@ -8,7 +8,7 @@ services:
       - "8080:8080"
     environment:
       SPRING_PROFILES_ACTIVE: prod
-      OPENAI_API_KEY: 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
+      OPENAI_API_KEY: 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
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/morak
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: toor
