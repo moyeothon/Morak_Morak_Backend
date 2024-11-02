@@ -10,9 +10,9 @@ spring:
       ddl-auto: update
     show-sql: true
 
-  ai:
-    openai:
-      api-key: ${spring.ai.openai.api-key}
-      model: gpt-4o-mini
-      api:
-        url: https://api.openai.com/v1/chat/completions
+ai:
+  openai:
+    api-key: ${spring.ai.openai.api-key}
+    model: gpt-4o-mini
+    api:
+      url: https://api.openai.com/v1/chat/completions
