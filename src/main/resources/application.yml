@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: prod
   datasource:
     url: jdbc:postgresql://db:5432/morak  # db는 Docker Compose에 정의된 PostgreSQL 서비스 이름
     username: root
@@ -10,7 +12,7 @@ spring:
     show-sql: true
   ai:
     openai:
+      api-key: ${spring.ai.openai.api-key}
       model: gpt-4o-mini
       api:
         url: https://api.openai.com/v1/chat/completions
-        key: ${OPENAI_API_KEY}  # AI API 키를 환경 변수로 설정
