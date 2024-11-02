@@ -34,7 +34,7 @@ public class OpenAiController {
         return ResponseEntity.ok("게임이 시작되었습니다.");
     }
 
-    @Operation(summary = "사용자의 gpt 요청", description = "사용자가 gpt에게 주관식 질문 요청을 합니다.")
+    @Operation(summary = "사용자의 주관식 질문", description = "사용자가 gpt에게 주관식 질문 요청을 합니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "응답 생성을 성공했습니다"),
             @ApiResponse(responseCode = "400", description = "잘못된 요청입니다"),
@@ -84,4 +84,19 @@ public class OpenAiController {
     public List<String> findAllChat() {
         return openAiService.getConversationHistory();
     }
+
+    @Operation(summary = "ai에게 게임 주제에 따른 추천 목록을 받아 조회합니다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "응답 생성을 성공했습니다"),
+            @ApiResponse(responseCode = "400", description = "잘못된 요청입니다"),
+            @ApiResponse(responseCode = "401", description = "헤더 없음 or 토큰 불일치",
+                    content = @Content(schema = @Schema(example = "INVALID_HEADER or INVALID_TOKEN")))
+    })
+    @PostMapping("/today/recommend")
+    public ApiResponseTemplate<GptResponseDto> findTodayRecommend() {
+        GptResponseDto gptResponseDto = openAiService.getTodayRecommend();
+        return ApiResponseTemplate.successResponse(gptResponseDto,SuccessCode.GET_SUCCESS);
+    }
+
+
 }
