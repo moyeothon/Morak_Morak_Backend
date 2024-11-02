@@ -2,10 +2,10 @@ spring:
   profiles:
     active: prod
   datasource:
-    url: jdbc:postgresql://db:5432/morak  # db는 Docker Compose에 정의된 PostgreSQL 서비스 이름
-    username: root
-    password: toor
-    driver-class-name: org.postgresql.Driver
+    url: ${spring.datasource.url}
+    username: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: update
