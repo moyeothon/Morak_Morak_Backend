@@ -1,6 +1,5 @@
 version: '3.8'
 
-
 services:
   app:
     build:
@@ -18,10 +17,8 @@ services:
     image: mysql:latest
     container_name: mysql_container
     environment:
-      MYSQL_ROOT_PASSWORD: toor
-      MYSQL_DATABASE: morak
-      MYSQL_USER: root
-      MYSQL_PASSWORD: toor
+      MYSQL_ROOT_PASSWORD: toor      # 루트 비밀번호만 설정
+      MYSQL_DATABASE: morak          # 데이터베이스 이름 설정
     ports:
       - "3306:3306"
     volumes:
