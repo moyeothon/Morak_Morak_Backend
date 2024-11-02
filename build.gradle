@@ -34,9 +34,14 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+<<<<<<< HEAD
+=======
+//	implementation 'mysql:mysql-connector-j:8.0.33'
+>>>>>>> dcbdd8ab75db04e482ced4fbdf89c94c3aba98b8
 	//swagger
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
 	implementation 'org.springframework.ai:spring-ai-openai-spring-boot-starter:0.8.0-SNAPSHOT'
+	runtimeOnly 'com.mysql:mysql-connector-j'
 
 }
 
