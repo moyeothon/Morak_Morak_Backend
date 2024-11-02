@@ -6,9 +6,7 @@ services:
       - "8080:8080"
     environment:
       SPRING_PROFILES_ACTIVE: prod
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/morak
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: toor  # MySQL 패스워드 지정
+      SPRING_AI_OPENAI_API_KEY: "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"  # 실제 OpenAI API 키로 교체
     networks:
       - backend
 
