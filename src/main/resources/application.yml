@@ -1,10 +1,10 @@
 spring:
   profiles:
-    active: prod  # 기본적으로 prod 프로파일을 활성화하도록 설정, 필요에 따라 변경 가능
+    active: prod
   datasource:
-    url: jdbc:mysql://db:3306/morak  # db는 docker-compose.yml에 정의된 MySQL 서비스의 이름
+    url: jdbc:mysql://db:3306/morak  # db는 docker-compose.yml의 MySQL 서비스 이름
     username: root                   # root 사용자로 설정
-    password: toor                   # 직접 입력한 비밀번호
+    password: toor                   # MySQL 비밀번호를 직접 입력
   jpa:
     hibernate:
       ddl-auto: update

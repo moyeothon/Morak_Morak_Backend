@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   app:
     build:
@@ -11,6 +9,7 @@ services:
     environment:
       SPRING_PROFILES_ACTIVE: prod
       OPENAI_API_KEY: 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
+
     depends_on:
       - db
 
@@ -24,6 +23,3 @@ services:
       - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
-
-volumes:
-  db_data:
