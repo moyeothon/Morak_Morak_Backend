@@ -9,20 +9,20 @@ services:
     environment:
       SPRING_PROFILES_ACTIVE: prod
       OPENAI_API_KEY: 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
-
     depends_on:
       - db
 
   db:
-    image: mysql:latest
-    container_name: mysql_container
+    image: postgres:latest
+    container_name: postgres_container
     environment:
-      MYSQL_ROOT_PASSWORD: toor
-      MYSQL_DATABASE: morak
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: toor
+      POSTGRES_DB: morak
     ports:
-      - "3306:3306"
+      - "5432:5432"
     volumes:
-      - db_data:/var/lib/mysql
+      - db_data:/var/lib/postgresql/data
 
 volumes:
   db_data:

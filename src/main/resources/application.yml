@@ -2,9 +2,10 @@ spring:
   profiles:
     active: prod
   datasource:
-    url: jdbc:mysql://db:3306/morak  # db는 docker-compose.yml의 MySQL 서비스 이름
-    username: root                   # root 사용자로 설정
-    password: toor                   # MySQL 비밀번호를 직접 입력
+    url: jdbc:postgresql://db:5432/morak  # db는 Docker Compose에 정의된 PostgreSQL 서비스 이름
+    username: root
+    password: toor
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: update

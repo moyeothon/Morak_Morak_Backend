@@ -33,14 +33,11 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
-	runtimeOnly 'com.mysql:mysql-connector-j'
+	implementation 'org.postgresql:postgresql:42.3.1'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
 	//swagger
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
-
-	//spring-ai
-	implementation 'org.springframework.ai:spring-ai-openai-spring-boot-starter:0.8.0-SNAPSHOT'
 
 }
 
