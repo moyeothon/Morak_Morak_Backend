@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .  # 현재 디렉터리를 Docker 빌드 컨텍스트로 설정
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
