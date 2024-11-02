@@ -1,6 +1,4 @@
 spring:
-  profiles:
-    active: prod
   datasource:
     url: jdbc:postgresql://db:5432/morak  # db는 Docker Compose에 정의된 PostgreSQL 서비스 이름
     username: root
