@@ -9,6 +9,9 @@ services:
     environment:
       SPRING_PROFILES_ACTIVE: prod
       OPENAI_API_KEY: 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
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/morak
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: toor
     depends_on:
       - db
 
@@ -16,10 +19,9 @@ services:
     image: postgres:latest
     container_name: postgres_container
     environment:
-      SPRING_PROFILES_ACTIVE: prod
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/morak
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: toor
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: toor
+      POSTGRES_DB: morak
     ports:
       - "5432:5432"
     volumes:
